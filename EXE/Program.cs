@@ -100,7 +100,7 @@ namespace FromStutterFixUpdated
                                 Console.WriteLine("Stutter fix: Flag set");
                             }
 
-                            if (game.exename == "eldenring" && File.Exists(Environment.CurrentDirectory + "\\fix"))
+                            if (game.exename == "eldenring" && File.Exists(Environment.CurrentDirectory + "/achievement"))
                             {
                                 const int trophyImpOffset = 72351912; //CS::CSTrophyImp, 1.10.1
                                 var ptr = ReadPtr(handle, baseAddr + trophyImpOffset) + 8;
