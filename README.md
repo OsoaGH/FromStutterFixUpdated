@@ -1,31 +1,22 @@
-# FromStutterFix (kinda dead sorry)
+# FromStutterFixUpdated
 
-This tool will apply a fix for a certain type of stutter in FromSoft games. It will also disable achievements in Elden Ring, to work around a bug where achievements can freeze the game when Steam is offline.
+This tool will apply a fix for a certain type of stutter in FromSoft games. It can also disable achievements in Elden Ring, to work around a bug where achievements can freeze the game when Steam is offline.
 
 Supported patches:
 * DS3 1.15.1
 * Sekiro 1.06
-* Elden Ring 1.06
+* Elden Ring 1.10.1
 
-If you run a newer patch of Elden Ring, using ertool is the only option. ertool will search for the required addresses so it should work on any patch and likely newer patches too. You can close it immediately after enabling the options to be sure it has no further impact on the game.
+## What's new?
+
+* I have updated the Elden Ring pointers so it supports the latest patch and plan on keeping them updated into the future. I wanted to avoid the temptation of cheating with ERTool, so updated this instead.
+* I still want to earn achievements so I've added an option to enable the achievment freeze fix. To enable it, add a file with no extension called "fix" in the same folder as the EXE file.
+* Made it easy to re-run the program without having to close it.
+* And it's just an EXE cos I dunno how to do DLLs and I like the re-run thingie.
 
 ## Usage
 
-There is a standalone .exe version which doesn't touch the game files, but needs to be run manually each time. There is also a .dll version which loads automatically, but may be more difficult to use with mods. Both do the same thing.
-
-Note: EAC needs to be disabled for Elden Ring.
-
-### EXE Version
-
 Run the game, then run the program. It will say "flag set" if it worked. Close the program. The fix will last until you restart the game.
-
-### DLL Version
-
-Place the DINPUT8.dll in the game directory. Run the game. After a delay, a chime sound will be played if the fix was applied successfully.
-
-To uninstall, delete the DINPUT8.dll.
-
-Note: This version also includes the logo screen skip, to avoid needing to choose between them or chain-load DLLs.
 
 ## How does it work?
 
@@ -50,3 +41,8 @@ Cool, but something is probably still wrong with your PC. Check if anything look
 ## I still get stutters at certain points in the game
 
 Stutters at loading triggers probably can't be fixed, except by From, or a miracle patch to the rendering pipeline. There may be other sources of stutter also.
+
+## Credit
+
+* Original program is by kh0nsu, I have not done much beside add some basic features and change some numbers.
+* I found the new pointers by debugging ERTool and just adding those to this program.
