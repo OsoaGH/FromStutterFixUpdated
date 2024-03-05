@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5DF606E8-7636-4B34-9A7F-95C9300AC273}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FromStutterFixUpdated</RootNamespace>
-    <AssemblyName>FromStutterFixUpdated</AssemblyName>
+    <RootNamespace>StutterFixEXE</RootNamespace>
+    <AssemblyName>StutterFixEXE</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
