@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.IO;
 
-namespace FromStutterFixUpdated
+namespace StutterFixEXE
 {
     class Program
     {
@@ -47,7 +47,7 @@ namespace FromStutterFixUpdated
         {
             new Game(){ exename = "darksoulsiii", ptrAddr = 0x49644C8, offset = 0x24b }, //1.15.1
             new Game(){ exename = "sekiro", ptrAddr = 0x3F42B28, offset = 0x23b }, //1.06
-            new Game(){ exename = "eldenring", ptrAddr = 73092424, offset = 2187 }, //1.10.1
+            new Game(){ exename = "eldenring", ptrAddr = 0x45B4D48, offset = 0x88b }, //1.10.1
         };
 
         public void run()

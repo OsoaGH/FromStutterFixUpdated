@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32602.291
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StutterFix", "StutterFix.vcxproj", "{5824B2BD-0EF4-4AB3-AC2D-49AE9559B39E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StutterFixDLL", "StutterFixDLL.vcxproj", "{5824B2BD-0EF4-4AB3-AC2D-49AE9559B39E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

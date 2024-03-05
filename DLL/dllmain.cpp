@@ -12,7 +12,6 @@ struct Patch {
 };
 
 enum GAME {
-    DS1,
     DS3,
     SEKIRO,
     ELDENRING,
@@ -57,10 +56,7 @@ GAME DetermineGame() {
 
     auto fileName = basename(std::string(fnPtr, fnLen));
     std::transform(fileName.begin(), fileName.end(), fileName.begin(), ::tolower);
-    if (fileName == "darksouls.exe") {
-        return GAME::DS1;
-    }
-    else if (fileName == "darksoulsiii.exe") {
+    if (fileName == "darksoulsiii.exe") {
         return GAME::DS3;
     }
     else if (fileName == "sekiro.exe") {
@@ -104,10 +100,6 @@ void SetupD8Proxy() {
 
 DWORD WINAPI doPatching(LPVOID lpParam)
 {
-    if (Game == GAME::DS1)
-    {//no DS1 fix needed
-        return 0;
-    }
     //patch succeeded, wait a moment before applying stutter fix; the target class needs to have initialised.
     Sleep(5000);
     
@@ -172,6 +164,7 @@ DWORD WINAPI doPatching(LPVOID lpParam)
             if (*ptrAchieve == 1)
             {
                 *ptrAchieve = 0;
+                PlaySound(TEXT("SystemStart"), NULL, SND_SYNC);
 #if _DEBUG
                 MessageBoxA(0, "Achievement disable.", "", 0);
                 printf("Achievements disabled, %d\r\n", i);
@@ -180,7 +173,6 @@ DWORD WINAPI doPatching(LPVOID lpParam)
         }
 
         //Beep(2000, 250); //annoying AF
-        PlaySound(TEXT("SystemStart"), NULL, SND_SYNC);
 #if _DEBUG
         printf("Patch success, i %d\r\n", i);
 #endif
@@ -200,7 +192,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
     case DLL_PROCESS_ATTACH:
         Game = DetermineGame();
         if (Game == GAME::UNKNOWN) {
-            MessageBoxA(0, "Unable to determine game. Valid EXEs are darksouls.exe, darksoulsiii.exe, sekiro.exe, elden_ring.exe and start_protected_game.exe", "", 0);
+            MessageBoxA(0, "Unable to determine game. Valid EXEs are darksoulsiii.exe, sekiro.exe, elden_ring.exe and start_protected_game.exe", "", 0);
             break; //game will likely crash without the real dinput8 being loaded, but that's okay.
         }
 
