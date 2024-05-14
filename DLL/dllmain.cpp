@@ -107,8 +107,8 @@ DWORD WINAPI doPatching(LPVOID lpParam)
     int flagOffset = 0;
     auto baseAddr = GetModuleHandle(NULL);
     if (Game == GAME::DS3) {
-        //for 1.15.1. TODO: support or at least recognise other patches
-        usrInputOffset = 0x49644C8;
+        //for 1.15.2. TODO: support or at least recognise other patches
+        usrInputOffset = 0x49644D0;
         flagOffset = 0x24b;
     }
     else if (Game == GAME::SEKIRO) {

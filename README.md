@@ -3,7 +3,7 @@
 This tool will apply a fix for a certain type of stutter in FromSoft games. It can also disable achievements in Elden Ring, to work around a bug where achievements can freeze the game when Steam is offline.
 
 Supported patches:
-* DS3 1.15.1
+* DS3 1.15.2
 * Sekiro 1.06
 * Elden Ring 1.10.1
 
@@ -66,4 +66,5 @@ Stutters at loading triggers probably can't be fixed, except by From, or a mirac
 
 * Original program is by kh0nsu, I have not done much beside add some basic features and change some numbers.
 * I found the new pointers by debugging ERTool and just adding those to this program.
+* MarcoSin42 has found the DS3 pointers for the latest version.
 * Alas, I do not know C++. ChatGPT helped me with figuring out how to detect the achievement file for the DLL version.
