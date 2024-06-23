@@ -117,14 +117,14 @@ DWORD WINAPI doPatching(LPVOID lpParam)
         flagOffset = 0x23b;
     }
     else if (Game == GAME::ELDENRING) {
-        //for 1.10.1. TODO: support or at least recognise other patches
-        usrInputOffset = 0x45B4D48;
+        //for 1.12. TODO: support or at least recognise other patches
+        usrInputOffset = 0x485DB68;
         flagOffset = 0x88b;
     }
 
     if (usrInputOffset == 0)
     {
-        MessageBoxA(0, "Stutter fix failed. You may be running an unsupported version.", "", 0);
+        MessageBoxA(0, "FromStutterFix failed. You may be running an unsupported version.", "", 0);
         return 1;
     }
 
@@ -135,7 +135,7 @@ DWORD WINAPI doPatching(LPVOID lpParam)
         i++;
         if (i > 60)
         {
-            MessageBoxA(0, "Stutter fix failed. You may be running an unsupported version.", "", 0);
+            MessageBoxA(0, "FromStutterFix failed. You may be running an unsupported version.", "", 0);
             return 1;
         }
         Sleep(500);
@@ -148,7 +148,7 @@ DWORD WINAPI doPatching(LPVOID lpParam)
 
         if (Game == GAME::ELDENRING && std::filesystem::exists("mods/achievement"))
         {
-            auto trophyImpPtr = (uint8_t***)((DWORD64)baseAddr + 0x45000A8); //CS::CSTrophyImp, 1.10/1.
+            auto trophyImpPtr = (uint8_t***)((DWORD64)baseAddr + 0x4589478); //CS::CSTrophyImp, 1.12.
             i = 0;
             while ((DWORD64)*trophyImpPtr < 0x700000000000LL || (DWORD64)*trophyImpPtr > 0x800000000000LL) //seems normal for this one to be below the base
             {
@@ -166,7 +166,7 @@ DWORD WINAPI doPatching(LPVOID lpParam)
                 *ptrAchieve = 0;
                 PlaySound(TEXT("SystemStart"), NULL, SND_SYNC);
 #if _DEBUG
-                MessageBoxA(0, "Achievement disable.", "", 0);
+                MessageBoxA(0, "Achievement disabled.", "", 0);
                 printf("Achievements disabled, %d\r\n", i);
 #endif
             }

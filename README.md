@@ -5,7 +5,7 @@ This tool will apply a fix for a certain type of stutter in FromSoft games. It c
 Supported patches:
 * DS3 1.15.2
 * Sekiro 1.06
-* Elden Ring 1.10.1
+* Elden Ring 1.12
 
 ## What's new?
 
