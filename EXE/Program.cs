@@ -47,7 +47,7 @@ namespace StutterFixEXE
         {
             new Game(){ exename = "darksoulsiii", ptrAddr = 0x49644D0, offset = 0x24b }, //1.15.2
             new Game(){ exename = "sekiro", ptrAddr = 0x3F42B28, offset = 0x23b }, //1.06
-            new Game(){ exename = "eldenring", ptrAddr = 0x45B4D48, offset = 0x88b }, //1.10.1
+            new Game(){ exename = "eldenring", ptrAddr = 0x485DB68, offset = 0x88b }, //1.12
         };
 
         public void run()
@@ -102,7 +102,7 @@ namespace StutterFixEXE
 
                             if (game.exename == "eldenring" && File.Exists(Environment.CurrentDirectory + "/achievement"))
                             {
-                                const int trophyImpOffset = 72351912; //CS::CSTrophyImp, 1.10.1
+                                const int trophyImpOffset = 0x4589478; //CS::CSTrophyImp, 1.12
                                 var ptr = ReadPtr(handle, baseAddr + trophyImpOffset) + 8;
                                 var ptr2 = ReadPtr(handle, ptr) + 0x4c;
                                 state = ReadByte(handle, ptr2);
