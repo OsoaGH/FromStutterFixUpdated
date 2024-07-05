@@ -20,7 +20,7 @@ enum GAME {
 
 GAME Game;
 
-typedef DWORD64(__stdcall *DIRECTINPUT8CREATE)(HINSTANCE, DWORD, REFIID, LPVOID *, LPUNKNOWN);
+typedef DWORD64(__stdcall* DIRECTINPUT8CREATE)(HINSTANCE, DWORD, REFIID, LPVOID*, LPUNKNOWN);
 DIRECTINPUT8CREATE fpDirectInput8Create;
 //TODO: fix type mismatch between DWORD64 and HRESULT?
 extern "C" __declspec(dllexport)  HRESULT __stdcall DirectInput8Create(
@@ -70,7 +70,7 @@ GAME DetermineGame() {
     }
 }
 
-int applyPatches(Patch * patches, int patchCount)
+int applyPatches(Patch* patches, int patchCount)
 {
     auto baseAddr = GetModuleHandle(NULL);
     int matches = 0;
@@ -102,7 +102,7 @@ DWORD WINAPI doPatching(LPVOID lpParam)
 {
     //patch succeeded, wait a moment before applying stutter fix; the target class needs to have initialised.
     Sleep(5000);
-    
+
     int usrInputOffset = 0;
     int flagOffset = 0;
     auto baseAddr = GetModuleHandle(NULL);
@@ -117,8 +117,8 @@ DWORD WINAPI doPatching(LPVOID lpParam)
         flagOffset = 0x23b;
     }
     else if (Game == GAME::ELDENRING) {
-        //for 1.12. TODO: support or at least recognise other patches
-        usrInputOffset = 0x485DB68;
+        //for 1.12.3. TODO: support or at least recognise other patches
+        usrInputOffset = 0x485DB88;
         flagOffset = 0x88b;
     }
 
@@ -140,7 +140,7 @@ DWORD WINAPI doPatching(LPVOID lpParam)
         }
         Sleep(500);
     }
-    
+
     auto ptrFlag = *usrInputPtr + flagOffset;
     if (*ptrFlag == 0)
     {
@@ -148,7 +148,7 @@ DWORD WINAPI doPatching(LPVOID lpParam)
 
         if (Game == GAME::ELDENRING && std::filesystem::exists("mods/achievement"))
         {
-            auto trophyImpPtr = (uint8_t***)((DWORD64)baseAddr + 0x4589478); //CS::CSTrophyImp, 1.12.
+            auto trophyImpPtr = (uint8_t***)((DWORD64)baseAddr + 0x4589498); //CS::CSTrophyImp, 1.12.3.
             i = 0;
             while ((DWORD64)*trophyImpPtr < 0x700000000000LL || (DWORD64)*trophyImpPtr > 0x800000000000LL) //seems normal for this one to be below the base
             {
@@ -197,7 +197,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
         }
 
         SetupD8Proxy();
-        
+
         res = CreateThread(NULL, 0, doPatching, NULL, 0, NULL);
         if (res == NULL)
         {
@@ -212,3 +212,36 @@ BOOL APIENTRY DllMain(HMODULE hModule,
     }
     return TRUE;
 }
+
+//#include <Windows.h>
+//
+//#include "ModUtils.h"
+//
+//using namespace ModUtils;
+//
+//DWORD WINAPI MainThread(LPVOID lpParam)
+//{
+//	Log("Activating StutterFix...");
+//	std::string aob = "48 89 05 ? ? ? ? 48 8b 05 ? ? ? ? e8 ? ? ? ? 4c 8b 08 41 b8 ? 00 00 00 48 8d 15 ? ? 00 00 48 8b c8 41 ff 51 ? 48 8b 1d ? ? ? ?";
+//	std::string expectedBytes = "00";
+//	std::string newBytes = "01";
+//	uintptr_t patchAddress = AobScan(aob);
+//	size_t offset = 0x88b;
+//	if (patchAddress != 0)
+//	{
+//		patchAddress += offset;
+//		ReplaceExpectedBytesAtAddress(patchAddress, expectedBytes, newBytes);
+//	}
+//	CloseLog();
+//	return 0;
+//}
+//
+//BOOL WINAPI DllMain(HINSTANCE module, DWORD reason, LPVOID)
+//{
+//	if (reason == DLL_PROCESS_ATTACH)
+//	{
+//		DisableThreadLibraryCalls(module);
+//		CreateThread(0, 0, &MainThread, 0, 0, NULL);
+//	}
+//	return 1;
+//}
